@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 import java.util.Random;
 
 public class TicTacToe implements ActionListener {
@@ -53,7 +54,27 @@ public class TicTacToe implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        for(int i = 0; i < 9; i++) {
+            if(e.getSource() == buttons[i]) {
+                if(player1Turn) {
+                    if(Objects.equals(buttons[i].getText(), "")) {
+                        buttons[i].setForeground(new Color(255, 0, 0));
+                        buttons[i].setText("X");
+                        player1Turn = false;
+                        textField.setText("O Turn");
+                        check();
+                    }
+                } else {
+                    if(Objects.equals(buttons[i].getText(), "")) {
+                        buttons[i].setForeground(new Color(0, 0, 255));
+                        buttons[i].setText("O");
+                        player1Turn = true;
+                        textField.setText("X Turn");
+                        check();
+                    }
+                }
+            }
+        }
     }
 
     public void firstTurn() {
